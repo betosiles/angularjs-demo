@@ -32,6 +32,7 @@
 
         <!-- Eclipse WTP: context name -->
         <web.context.name>${project.artifactId}</web.context.name>
+        <web.src.dir>src/main/webapp</web.src.dir>
 
         <servlet.version>3.0.1</servlet.version>
         <junit.version>4.11</junit.version>
@@ -112,6 +113,7 @@
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <stopPort>8005</stopPort>
                     <stopKey>STOP</stopKey>
+                    <webAppSourceDirectory>${web.src.dir}</webAppSourceDirectory>
                     <webApp>
                         <contextPath>/${web.context.name}</contextPath>
                         <defaultsDescriptor>${basedir}/src/main/config/jetty-8/webdefault.xml</defaultsDescriptor>
@@ -143,6 +145,15 @@
                     <configuration>
                         <source>1.6</source>
                         <target>1.6</target>
+                    </configuration>
+                </plugin>
+
+                <!-- Change war source directory -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <configuration>
+                        <warSourceDirectory>${web.src.dir}</warSourceDirectory>
                     </configuration>
                 </plugin>
             </plugins>
