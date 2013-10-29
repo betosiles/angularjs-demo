@@ -63,7 +63,13 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- JavaScript Framework -->
+        <!-- MVC -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>backbonejs</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>angularjs</artifactId>
@@ -103,13 +109,6 @@
             <version>2.1.0</version>
         </dependency>
 
-        <!-- MVC -->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>backbonejs</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
         <!-- Template Engine -->
         <dependency>
             <groupId>org.webjars</groupId>
@@ -124,6 +123,25 @@
             <version>2.6.2-1</version>
         </dependency>
 
+        <!-- UI Control -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-ui</artifactId>
+            <version>1.10.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>angular-ui-bootstrap</artifactId>
+            <version>0.6.0-1</version>
+        </dependency>
+
         <!-- Test Framework -->
         <dependency>
             <groupId>org.webjars</groupId>
@@ -135,6 +153,12 @@
             <groupId>org.webjars</groupId>
             <artifactId>jasmine</artifactId>
             <version>1.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>sinonjs</artifactId>
+            <version>1.7.3</version>
         </dependency>
 
         <!-- Visualization -->
@@ -154,6 +178,12 @@
             <groupId>org.webjars</groupId>
             <artifactId>raphaeljs</artifactId>
             <version>2.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>highcharts</artifactId>
+            <version>3.0.1</version>
         </dependency>
     </dependencies>
 
