@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Closure sample</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../styles/normalize.css">
+    </head>
+    <body>
+        <div id="demo">
+            <a href="#">A</a>
+            <a href="#">B</a>
+            <a href="#">C</a>
+            <a href="#">D</a>
+        </div>
+
+        <script src="../vendor/LABjs/LAB.src.js"></script>
+        <script>
+            $LAB.setOptions({
+                'BasePath': '../',
+                'Debug': true
+            })
+            .script('scripts/console.js')
+            .script([
+                'webjars/jquery/2.0.3/jquery.js',
+                'webjars/underscorejs/1.5.2/underscore.js'
+            ]).wait(function() {
+                var addHandlers = function(nodes) {
+                    var i, node;
+                    var count = nodes.length;
+
+                    for (i = 0; i < count; i += 1) {
+                        node = nodes[i];
+                        node.onclick = function(event) {
+                            alert((i + 1) * 100);
+                        }
+                    }
+                };
+
+                addHandlers(document.getElementById('demo').getElementsByTagName('a'));
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+apply plugin: 'eclipse'
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+
+    compile 'org.webjars:jquery:2.0.3-1'
+    compile 'org.webjars:angularjs:1.2.9'
+    compile 'org.webjars:underscorejs:1.5.2-2'
+
+    compile 'org.webjars:jquery-ui:1.10.3'
+    compile 'org.webjars:bootstrap:3.0.3'
+
+    // angular-translate
+    compile 'org.webjars:angular-translate:1.1.1'
+    compile 'org.webjars:angular-translate-handler-log:0.1.3'
+    compile 'org.webjars:angular-translate-interpolation-messageformat:0.1.2'
+    compile 'org.webjars:angular-translate-loader-static-files:0.1.6'
+    compile 'org.webjars:angular-translate-loader-url:0.1.2'
+    compile 'org.webjars:angular-translate-storage-cookie:0.1.3'
+    compile 'org.webjars:angular-translate-storage-local:0.1.3'
+
+    // angular-ui
+    compile 'org.webjars:angular-ui:0.4.0-1'
+    compile 'org.webjars:angular-ui-utils:0.1.0'
+    compile 'org.webjars:angular-ui-bootstrap:0.9.0'
+
+    testCompile 'junit:junit:4.11'
+}
+
+httpPort = 8080
+stopPort = 9451
+stopKey = 'foo'
