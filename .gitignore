@@ -4,7 +4,7 @@
 # Gradle
 .gradle
 
-# Build output directies
+# Build output directories
 /target
 */target
 */**/target
@@ -17,6 +17,9 @@
 .settings
 .metadata
 bin
+
+# IDEA
+.idea
 
 # Java Class
 *.class
