@@ -49,6 +49,20 @@ var _config = {
 
 app.constant('config', _config);
 
+
+// Configuring $routeProvider
+app.config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'views/main.html',
+            controller: 'MainCtrl'
+        })
+        .otherwise({
+            redirectTo: '/'
+        })
+}]);
+
+
 // Configuring $translateProvider
 app.config(['$translateProvider', 'config', function($translateProvider, config) {
     var i18nPath = config.contextPath + '/i18n';
