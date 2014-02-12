@@ -9,6 +9,7 @@
 }
 
 input.ng-invalid,
-select.ng-invalid {
+select.ng-invalid,
+div.ng-invalid {
     border-color: #FA787E;
 }

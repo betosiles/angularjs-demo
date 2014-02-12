@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Bootstrap Multiselect</title>
+        <meta name="description" content="bootstrap multiselect">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+
+        <link rel="stylesheet" href="../styles/normalize.css">
+        <link rel="stylesheet" href="../webjars/bootstrap/3.0.3/css/bootstrap.css">
+        <link rel="stylesheet" href="../webjars/bootstrap-multiselect/0.9.1/css/bootstrap-multiselect.css">
+        <link rel="stylesheet" href="../styles/main.css">
+        <script src="../vendor/modernizr/modernizr.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <aside id="popups" ng-include="'../views/debugbox.html'"></aside>
+        <div id="content" class="container" ng-controller="MainCtrl">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Bootstrap Multiselect</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form">
+                        <div class="form-group" ng-cloak>
+                            <label for="itemSelector" class="control-label">{{'FILTER_CATEGORY' | translate}}</label>
+                            <select id="itemSelector" class="form-control multiselect" multiple="multiple" ng-model="formData.items"
+                        ng-options="item.name for item in items track by item.id" ng-required="true" multiselect-dropdown>
+                            </select>
+                        </div>
+
+                        <button id="btnSubmit" type="submit" class="btn btn-primary" data-loading-text="Loading..." ng-click="submit()" ng-disabled="validate() === false">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script src="../vendor/LABjs/LAB.src.js"></script>
+        <script>
+            $LAB.setOptions({
+                'BasePath': '../',
+                'Debug': true
+            })
+            .script('scripts/console.js')
+            .script([
+                'webjars/jquery/2.0.3/jquery.js',
+                'webjars/angularjs/1.2.10/angular.js',
+                'webjars/underscorejs/1.5.2/underscore.js'
+            ]).wait()
+            .script(function() {
+                var locale = (navigator.language).toLowerCase();
+                var url = 'webjars/angularjs/1.2.10/i18n/angular-locale_' + locale + '.js';
+                return url;
+            })
+            .script([
+                'webjars/angularjs/1.2.10/angular-route.js'
+            ])
+            .script([
+                'webjars/angular-translate/1.1.1/angular-translate.js',
+                'webjars/angular-translate-loader-static-files/0.1.6/angular-translate-loader-static-files.js',
+                'webjars/angular-translate-storage-cookie/0.1.3/angular-translate-storage-cookie.js',
+                'webjars/angular-translate-storage-local/0.1.3/angular-translate-storage-local.js'
+            ])
+            .script([
+                'webjars/jquery-ui/1.10.3/ui/jquery-ui.js',
+                'webjars/bootstrap/3.0.3/js/bootstrap.js',
+                'webjars/angular-ui/0.4.0/angular-ui.js',
+                'webjars/angular-ui-utils/0.1.0/ui-utils.js',
+                'webjars/angular-ui-bootstrap/0.9.0/ui-bootstrap-tpls.js',
+                'vendor/datajs/datajs-1.1.1.js',
+                'webjars/select2/3.4.5/select2.js',
+                'webjars/ui-select2/0.0.5/ui-select2.js',
+                'webjars/bootstrap-multiselect/0.9.1/js/bootstrap-multiselect.js'
+            ]).wait()
+            .script('scripts/main.js').wait()
+            .script('scripts/app.js').wait()
+            .script('scripts/config.js').wait()
+            .script([
+                //'scripts/directives/directives.js'
+            ])
+            .script([
+                'scripts/filters/filters.js'
+            ])
+            .script([
+                'scripts/services/channel.js',
+                'scripts/services/dataStorage.js',
+                'scripts/services/dataService.js'
+            ])
+            .script([
+                'scripts/controllers/debugboxCtrl.js'
+            ]).wait(function() {
+                var app = angular.module('app');
+                app.controller('MainCtrl', ['$scope', 'channel', 'dataService', function($scope, channel, dataService) {
+
+                    //--------------------------------------------------------------------------
+                    // Form
+                    //--------------------------------------------------------------------------
+
+                    $scope.formData = {
+                        items: []
+                    };
+
+                    function validate() {
+                        var formData = $scope.formData;
+
+                        if (!formData.items || formData.items.length === 0) {
+                            return false;
+                        }
+
+                        return true;
+                    }
+
+                    $scope.validate = validate;
+
+                    function execute() {
+                        var formData = $scope.formData;
+                        var params = {};
+                        params.item_ids = _.pluck(formData.items, 'id');
+
+                        channel.publish('debugbox_open', {
+                            title: 'Request Body',
+                            message: angular.toJson(params, true)
+                        });
+                    }
+
+                    $scope.submit = execute;
+
+                    //--------------------------------------------------------------------------
+                    // Items
+                    //--------------------------------------------------------------------------
+
+                    function initItemSelector() {
+                        var itemSelector = jQuery('#itemSelector');
+
+                        itemSelector.multiselect({
+                            includeSelectAllOption: true,
+                            //numberDisplayed: 2,
+                            maxHeight: 200,
+                            buttonClass: 'btn btn-default btn-danger',
+                            onChange: function(element, checked) {
+                                var items = $scope.formData.items || [];
+                                var button = this.$button;
+                                button.toggleClass('btn-danger', items.length === 0);
+                            }
+                        });
+
+                        // rebuild when options changed
+                        $scope.$watch(function() {
+                            var selectDomNode = itemSelector[0];
+                            return selectDomNode.length;
+                        }, function(newValue, oldValue) {
+                            itemSelector.multiselect('rebuild');
+                        });
+
+                        // refresh when selection changed
+                        $scope.$watch('formData.items', function(newValue, oldValue) {
+                            itemSelector.multiselect('refresh');
+                        });
+                    }
+
+                    function updateItems() {
+                        var params = {
+                        };
+
+                        dataService.getItems(params, function(data) {
+                            var items = data.results;
+                            $scope.items = items;
+                        });
+                    }
+
+                    //--------------------------------------------------------------------------
+                    // bootstrap
+                    //--------------------------------------------------------------------------
+
+                    function init() {
+                        initItemSelector();
+                    }
+
+                    function refresh() {
+                        updateItems();
+                    }
+
+                    $scope.refresh = refresh;
+
+                    init();
+                    refresh();
+                }]);
+            }).wait(function() {
+                angular.bootstrap(document, ['app']);
+            });
+        </script>
+    </body>
+</html>
