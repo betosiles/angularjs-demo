@@ -97,7 +97,9 @@
                 'scripts/controllers/debugboxCtrl.js'
             ]).wait(function() {
                 var app = angular.module('app');
-                app.controller('MainCtrl', ['$scope', 'channel', 'dataService', function($scope, channel, dataService) {
+                app.controller('MainCtrl', ['$scope', 'config', 'channel', 'dataService', function($scope, config, channel, dataService) {
+
+                    config.service.offline = true;
 
                     //--------------------------------------------------------------------------
                     // Form
