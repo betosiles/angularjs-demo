@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Welcome</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group" ng-cloak>
+                <li class="list-group-item" ng-repeat="(library, version) in versionInfo">
+                    <span class="badge">{{version}}</span>
+                    {{library}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

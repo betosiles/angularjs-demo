@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('contentCtrl', ['$scope', 'dataStorage', 'channel', 'dataService',
+app.controller('ContactCtrl', ['$scope', 'dataStorage', 'channel', 'dataService',
 function($scope, dataStorage, channel, dataService) {
 
     function updateItems() {
