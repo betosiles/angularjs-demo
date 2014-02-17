@@ -46,16 +46,16 @@
             .script('scripts/console.js')
             .script([
                 'webjars/jquery/2.0.3/jquery.js',
-                'webjars/angularjs/1.2.10/angular.js',
+                'webjars/angularjs/1.2.13/angular.js',
                 'webjars/underscorejs/1.5.2/underscore.js'
             ]).wait()
             .script(function() {
                 var locale = (navigator.language).toLowerCase();
-                var url = 'webjars/angularjs/1.2.10/i18n/angular-locale_' + locale + '.js';
+                var url = 'webjars/angularjs/1.2.13/i18n/angular-locale_' + locale + '.js';
                 return url;
             })
             .script([
-                'webjars/angularjs/1.2.10/angular-route.js'
+                'webjars/angularjs/1.2.13/angular-route.js'
             ])
             .script([
                 'webjars/angular-translate/1.1.1/angular-translate.js',
