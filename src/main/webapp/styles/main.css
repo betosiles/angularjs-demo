@@ -13,3 +13,7 @@ select.ng-invalid,
 div.ng-invalid {
     border-color: #FA787E;
 }
+
+.thumbnail {
+    cursor: pointer;
+}
