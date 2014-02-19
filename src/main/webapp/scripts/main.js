@@ -39,9 +39,9 @@ function bootstrap(options) {
             'bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.10.0.js',
             'bower_components/datajs/datajs-1.1.1.js',
             'bower_components/select2/select2.js',
-            'bower_components/angular-ui-select2/src/select2.js'
+            'bower_components/angular-ui-select2/src/select2.js',
+            'bower_components/raphael/raphael.js'
         ]).queueWait()
-        .queueScript('scripts/main.js').queueWait()
         .queueScript('scripts/app.js').queueWait()
         .queueScript('scripts/config.js').queueWait()
         .queueScript([

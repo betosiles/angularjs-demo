@@ -39,9 +39,9 @@ function bootstrap(options) {
             'webjars/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js',
             'vendor/datajs/datajs-1.1.1.js',
             'webjars/select2/3.4.5/select2.js',
-            'webjars/ui-select2/0.0.5/ui-select2.js'
+            'webjars/ui-select2/0.0.5/ui-select2.js',
+            'webjars/raphaeljs/2.1.2/raphael.js'
         ]).queueWait()
-        .queueScript('scripts/main.js').queueWait()
         .queueScript('scripts/app.js').queueWait()
         .queueScript('scripts/config.js').queueWait()
         .queueScript([
