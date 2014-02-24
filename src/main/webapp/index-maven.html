@@ -39,18 +39,6 @@
 
         <script src="vendor/LABjs/LAB.src.js"></script>
         <script src="scripts/bootstrap-maven.js"></script>
-        <script>
-            bootstrap();
-
-            $LAB.runQueue()
-            .script([
-                'scripts/controllers/NavbarCtrl.js',
-                'scripts/controllers/HomeCtrl.js',
-                'scripts/controllers/AboutCtrl.js',
-                'scripts/controllers/ContactCtrl.js'
-            ]).wait(function() {
-                angular.bootstrap(document, ['app']);
-            });
-        </script>
+        <script src="scripts/main.js"></script>
     </body>
 </html>
