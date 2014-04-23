@@ -69,20 +69,26 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>angularjs</artifactId>
-            <version>1.2.13</version>
+            <version>1.2.16</version>
         </dependency>
 
         <!-- i18n -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>angular-translate</artifactId>
-            <version>1.1.1</version>
+            <version>2.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>angular-translate-interpolation-messageformat</artifactId>
             <version>0.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>angular-translate-loader-partial</artifactId>
+            <version>2.0.0</version>
         </dependency>
 
         <dependency>
@@ -113,19 +119,19 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>angular-ui</artifactId>
-            <version>0.4.0-1</version>
+            <version>0.4.0-2</version>
         </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>angular-ui-bootstrap</artifactId>
-            <version>0.10.0</version>
+            <version>0.10.0-1</version>
         </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>angular-ui-utils</artifactId>
-            <version>0.1.0</version>
+            <version>0.1.0-1</version>
         </dependency>
 
         <dependency>
@@ -138,7 +144,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>requirejs</artifactId>
-            <version>2.1.10</version>
+            <version>2.1.11-1</version>
         </dependency>
 
         <!-- DOM Query -->
@@ -158,33 +164,39 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>underscorejs</artifactId>
-            <version>1.5.2-2</version>
+            <version>1.6.0-1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>underscore.string</artifactId>
+            <version>2.3.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>lodash</artifactId>
-            <version>2.4.1-1</version>
+            <version>2.4.1-3</version>
         </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>modernizr</artifactId>
-            <version>2.6.2-1</version>
+            <version>2.7.1</version>
         </dependency>
 
         <!-- Template Engine -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>mustachejs</artifactId>
-            <version>0.7.0</version>
+            <version>0.8.1</version>
         </dependency>
 
         <!-- UI Control -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery-ui</artifactId>
-            <version>1.10.3</version>
+            <version>1.10.4</version>
         </dependency>
 
         <dependency>
@@ -196,13 +208,13 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>select2</artifactId>
-            <version>3.4.5</version>
+            <version>3.4.6</version>
         </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap-switch</artifactId>
-            <version>1.8</version>
+            <version>3.0.0</version>
         </dependency>
 
         <!-- Test Framework -->
@@ -215,26 +227,26 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jasmine</artifactId>
-            <version>1.3.1</version>
+            <version>2.0.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>sinonjs</artifactId>
-            <version>1.7.3</version>
+            <version>1.7.3-1</version>
         </dependency>
 
         <!-- Visualization -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>d3js</artifactId>
-            <version>3.4.1</version>
+            <version>3.4.4-1</version>
         </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>highcharts</artifactId>
-            <version>3.0.7</version>
+            <version>3.0.9</version>
         </dependency>
 
         <dependency>
@@ -262,17 +274,43 @@
         <testSourceDirectory>src/test/java</testSourceDirectory>
         -->
 
-        <!--
         <finalName>${project.artifactId}</finalName>
-        -->
+
+        <pluginManagement>
+            <plugins>
+                <!-- Use JDK 1.6 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                        <!--
+                        <includes>
+                            <include>**</include>
+                        </includes>
+                        -->
+                    </configuration>
+                </plugin>
+
+                <!-- Change war source directory -->
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <warSourceDirectory>${web.src.dir}</warSourceDirectory>
+                        <warSourceExcludes>WEB-INF/lib/**,bower_components/**/test*/**</warSourceExcludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 
         <plugins>
 
-            <!-- skip unit test-->
+            <!-- Skip unit test-->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.16</version>
+                <version>2.17</version>
                 <configuration>
                     <skipTests>${skipTests}</skipTests>
                 </configuration>
@@ -315,49 +353,21 @@
                 </configuration>
             </plugin>
 
-            <!-- enable the failsafe plugin for the integration-test phase -->
+            <!-- Enable the failsafe plugin for the integration-test phase -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.16</version>
+                <version>2.17</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
-
-        <pluginManagement>
-            <plugins>
-                <!-- Use JDK 1.6 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                        <!--
-                        <includes>
-                            <include>**</include>
-                        </includes>
-                        -->
-                    </configuration>
-                </plugin>
-
-                <!-- Change war source directory -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <configuration>
-                        <warSourceDirectory>${web.src.dir}</warSourceDirectory>
-                        <warSourceExcludes>WEB-INF/lib/**,bower_components/**/test*/**</warSourceExcludes>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
 
 
@@ -369,13 +379,13 @@
 
         <!-- Profile for deploy WARs to the remote staging server -->
         <profile>
-            <id>deploy.staging.server</id>
+            <id>deploy-staging-server</id>
             <properties>
                 <cargo.plugin.version>1.4.2</cargo.plugin.version>
 
                 <!-- staging server -->
                 <staging.server.container>tomcat7x</staging.server.container>
-                <staging.server.host>cnpvg50809797vm10.dhcp.pvgl.sap.corp</staging.server.host>
+                <staging.server.host>10.58.184.253</staging.server.host>
                 <staging.server.port>8080</staging.server.port>
                 <staging.server.protocol>http</staging.server.protocol>
                 <staging.server.url>${staging.server.protocol}://${staging.server.host}:${staging.server.port}</staging.server.url>
@@ -384,8 +394,6 @@
                 <staging.server.password>tomcat</staging.server.password>
                 <staging.server.timeout>30000</staging.server.timeout>
             </properties>
-            <dependencies>
-            </dependencies>
             <build>
                 <plugins>
                     <!-- deploy war packages to the staging server for test execution -->
@@ -440,7 +448,7 @@
 
         <!-- Profile for JS Test Runner -->
         <profile>
-            <id>test.js</id>
+            <id>test-js</id>
             <properties>
                 <!-- local server -->
                 <local.server.host>localhost</local.server.host>
